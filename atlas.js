@@ -1,6 +1,9 @@
-year.innerText = new Date().getFullYear();
+// Set the current year in the footer
+document.getElementById("year").innerText = new Date().getFullYear();
+
 function showCountriesByContinent(continent) {
-    staty.innerHTML = ''; 
+    const staty = document.getElementById('staty');
+    staty.innerHTML = '';
 
     fetch(`https://restcountries.com/v3.1/region/${continent}`)
         .then((response) => response.json())
@@ -27,7 +30,7 @@ function showCountriesByContinent(continent) {
             const countryLinks = document.querySelectorAll('.country-link');
             countryLinks.forEach(link => {
                 link.addEventListener('click', function(event) {
-                    event.preventDefault(); // Zabraňuje výchozímu chování odkazu
+                    event.preventDefault(); // Prevents default behavior of the link
                     const index = Array.from(countryLinks).indexOf(link);
                     const selectedStat = data[index];
                     showModalWithCountryInfo(selectedStat.translations.ces.common, selectedStat.population, selectedStat.area);
@@ -35,10 +38,6 @@ function showCountriesByContinent(continent) {
             });
         });
 }
-
-
-
-
 
 document.addEventListener('DOMContentLoaded', function() {
     showCountriesByContinent('europe');
@@ -50,4 +49,3 @@ document.querySelectorAll('.dropdown-item').forEach(item => {
         showCountriesByContinent(continent);
     });
 });
-
